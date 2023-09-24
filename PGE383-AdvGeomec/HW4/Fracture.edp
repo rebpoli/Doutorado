@@ -149,9 +149,25 @@ for(int i=0;i<1000;i++) {
 ofstream ffw("FractureWall.dat");
 ffw << "x,y,u1,u2" << endl;
 for(int i=0;i<1000;i++) {
-  real t = -pi/2 + pi/2 * i / 1000. ;
+  real t = -pi/2 + pi * i / 1000. ;
   real x = fw * cos(t) ;
   real y = xf * sin(-t) ;
 
   ffw<< x <<","<< y <<","<< u1(x,y) << "," << u2(x,y) << endl;
+}
+
+// Along X=0
+ofstream ffx0("Along_X_equals_0.dat");
+ffx0 << "x,y,u1,u2,sxx,syy,sxy" << endl;
+for(int i=0;i<1000;i++) {
+  real x = 0;
+  real y = ya + ySize/1000*i;
+
+  ffx0 << x << "," << y 
+       << "," << u1(x,y) 
+       << "," << u2(x,y) 
+       << "," << sigmaxx(x,y)
+       << "," << sigmayy(x,y)
+       << "," << sigmaxy(x,y) 
+       << endl;
 }
