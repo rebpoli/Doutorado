@@ -42,15 +42,15 @@ plot( Right(10)+Top(10)+Left1(10), Left2(10) +Bottom(10) +Frac(40), wait=true);
 
 //--------------------------------------------------------------------
 // Create mesh 
-int n = 100; // number of mesh nodes on the outer borders 
-int nfrac = 100; // number of mesh nodes on wellbore 
+int n = 30; // number of mesh nodes on the outer borders 
+int nfrac = 30; // number of mesh nodes on wellbore 
 mesh Omega = buildmesh (Right(n)+Top(n)+Left1(n/2)+Left2(n/2)+Bottom(n)+Frac(nfrac));
 
 plot(Omega, wait=true);
 
 // FE spaces 
 fespace Displacement(Omega, P2); // linear shape functions 
-fespace Stress(Omega, P0); // piecewise constants
+fespace Stress(Omega, P2); // piecewise constants
 
 Displacement u1, u2, v1, v2;
 Stress sigmaxx, sigmayy, sigmaxy;
