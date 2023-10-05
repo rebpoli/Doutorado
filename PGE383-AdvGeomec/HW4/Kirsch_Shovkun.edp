@@ -39,7 +39,7 @@ plot(Omega, wait=true);
 
 // FE spaces 
 fespace Displacement(Omega, P2); // linear shape functions 
-fespace Stress(Omega, P0); // piecewise constants
+fespace Stress(Omega, P1); // piecewise constants
 
 Displacement u1, u2, v1, v2;
 Stress sigmaxx, sigmayy, sigmaxy;
@@ -103,6 +103,7 @@ plot(sigmaxx,fill=1, cmm="Stress sigmaxx",wait=1,value=true);
 
 //write files
 ofstream ff("output.dat");
+ff << "x,y,sigxx,sigyy,sigxy,ux,vy" << endl;
 for(int i=0;i<100;i++) {
 for(int j=0;j<100;j++) {
 	// x, y, Sxx, Syy, Sxy
@@ -114,6 +115,8 @@ for(int j=0;j<100;j++) {
 		<<", "<< sigmaxx(xline,yline)
 		<<", "<< sigmayy(xline,yline)
 		<<", "<< sigmaxy(xline,yline) 
+		<<", "<< u1(xline,yline) 
+		<<", "<< u2(xline,yline) 
 		<<endl;
 }
 }
