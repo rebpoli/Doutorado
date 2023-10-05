@@ -1,0 +1,29 @@
+  156 :   ffw<< x <<","<< y <<","<< u1(x,y) << "," << u2(x,y) << endl;
+  157 : }
+  158 :
+  159 : // Along X=0
+  160 : ofstream ffx0("Along_X_equals_0.dat");
+  161 : ffx0 << "x,y,u1,u2,sxx,syy,sxy" << endl;
+  162 : for(int i=0;i<1000;i++) {
+  163 :   real x = 0;
+ *** Warning  The identifier x hide a Global identifier
+ 
+  164 :   real y = ya + ySize/1000*i;
+ *** Warning  The identifier y hide a Global identifier
+ 
+  165 :
+  166 :   ffx0 << x << "," << y
+  167 :        << "," << u1(x,y)
+  168 :        << "," << u2(x,y)
+  169 :        << "," << sigmaxx(x,y)
+  170 :        << "," << sigmayy(x,y)
+  171 :        << "," << sigmaxy(x,y)
+  172 :        << endl;
+  173 : }
+  174 :  sizestack + 1024 =7688  ( 6664 )
+ 
+  --  mesh:  Nb of Triangles =   3925, Nb of Vertices 2038
+ kk 2 6 :   -- Solve :
+          min 7.96286e-26  max 0.00626231
+          min -0.00223294  max 0.00222922
+ try getConsole G:\Meu Drive\Renato\05_Doutorado\DISCIPLINAS\Doutorado-GIT\PGE383-AdvGeomec\HW4\Fracture.edp
