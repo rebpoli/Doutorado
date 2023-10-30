@@ -1,0 +1,7 @@
+for phi=0..90
+for delta=0..360   --azimush==th
+rgw=f(phi,delta)
+sw=f(sg,rgw)
+for theta=0..360
+s_theta=f(theta,sw,pw,pp,nu)
+s_theta^p=f(Stheta)	
