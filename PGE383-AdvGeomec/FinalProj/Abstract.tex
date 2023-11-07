@@ -1,0 +1,46 @@
+\documentclass[a4paper]{article}
+%\usepackage{simplemargins}
+
+%\usepackage[square]{natbib}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+
+\begin{document}
+\pagenumbering{gobble}
+
+\normalsize
+ \begin{center}
+PGE383 - Advanced Geomechanics - Fall 2023
+ \end{center}
+\Large
+ \begin{center}
+\vspace{30pt}
+Finite elements analysis of fractured media poromechanics in mesoscale
+
+\hspace{10pt}
+
+% Author names and affiliations
+\large
+Renato Poli (rep2656) \\
+
+\hspace{10pt}
+
+\end{center}
+
+\hspace{10pt}
+
+\normalsize
+
+Large-scale mechanical models routinely collect data from small-scale laboratory experiments.
+The fact that laboratory samples are usually undamaged and with no major discontinuities implies on high uncertainties, which are mostly mitigated using simple penalties. Including features and joints like fractures, faults, vugues or bedding planes into the upscaling procedure reduces the uncertainty and assimilation of geological information into the large-scale numerical models.
+
+This work investigates the role of mesoscale fractures in the macroscale rock stresses and strains. We present Porosolve, an application-specific numerical tridimensional Thermo-Hydro-Mechanical (THM) simulator based on Finite Element Analysis. Porosolve uses lower-dimensional 2D surfaces to map discontinuities explicitly so that fractures and faults constitutive equations are input as boundary conditions for the continua. The continua is modeled as a poroelastic media, whereas fracture mechanics show more compliant elastic behavior. 
+
+The workflow starts with the validation of the numerical model. With the digital model set, complete triaxial tests are simulated with single fracture configurations in different dip and strike angles. Both pore pressure, confinement stress, and deviatoric stimuli vary on each run, outputting stresses and strain measurements at the boundaries. The engine then extrapolates the equivalent mechanical large-scale parameters from the measurements.
+
+This work is limited to upscaling in simple scenarios, comparing to literature findings, and motivating follow-up investigation on Fracture-Aware Upscaling and homogeneization of mechanical parameters in porous media.
+
+
+\end{document}
