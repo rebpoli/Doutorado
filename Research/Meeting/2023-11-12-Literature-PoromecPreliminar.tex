@@ -1,0 +1,140 @@
+\input{beamer_setup.tex}
+
+
+
+\institute[UT, Austin]{University of Texas at Austin, PGE}
+
+\title[Num modelling of salt caverns]{Numerical modelling of salt caverns}
+\subtitle{Literature assessment, brainstorming}
+\author[RPoli]{Renato Poli}
+\date{November 12, 2023}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}
+\frametitle{Review of the literature, keywords}
+\begin{itemize}
+\item cjknsa da
+\item cjknsa da
+\item cjknsa da
+\item cjknsa da
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Talk to Hassan Abadi}
+\begin{itemize}
+\item A sponsor: \href{https://www.respec.com/market/energy/caverns-hydrogen-underground-storage/}{RESPEC website}
+\item Impact of the cycles in stability
+\item Low energy density of the caverns ($H_2$)
+\item MIT - Mechanical Integrity Test (using $N_2$)
+\item The brine in long contact with the cavern walls may impact stability?
+\item Overview of projects worldwide? It seems that Canada has a well-set market on storage in caverns
+\item Muri Dussault (???) - Kamy knows him
+\item Adcore - utility company in Canada?
+\item The key of the research is risk and regulation (form companies and governments)
+\item Percolation of H2 in water saturated rock.
+\item Flow in caverns is in open space and mainly gravitational
+\item Well is a critical point! Cement-rock interface, how to ensure seal? Wellbore is a critical point of leakage
+\item Tetsiana (Stanford) - talked about cement
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Workflow (still to fill...)}
+\begin{itemize}
+\item Understand the problem
+	\begin{itemize}
+		\item Overall picture
+		\item Where it is applied
+		\item Main challenges
+		\item Accidents?
+		\item Risks, regulations
+    \end{itemize}
+\item Prototype
+	\begin{itemize}
+		\item Proof of concepts - currently using PoroMec (own simulator)
+		\item Standalone software
+	\end{itemize}
+\item Case study
+	\begin{itemize}
+		\item 
+	\end{itemize}
+\item Optimize
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{RCGI - Brazil}
+\framesubtitle{\cite{goulart20} Technology readiness assessment of ultra-deep salt caverns for carbon capture and storage in Brazil}
+\begin{itemize}
+\item Funded by FAPESP RCGI (Research center for gas innovation - \href{https://sites.usp.br/rcgi/br/rgci_br/}{link}). Founder sponsors: Shell and Fapesp.
+\item One of the authors is Alvaro Maia, a ex-Senior Consultant in Petrobras (well drilling, geomechanics).
+\item They study caverns of up to 150x450m, created by dissolution, with geomechanical simulations.
+\item Well is the critical element of an underground storage system, special attention to the cement.
+\item May store 4 billion $Sm^3$
+\item Used simulator COVES, developped by Alvaro Maia in the 1980s (See \cite{maia1984})
+\end{itemize}
+See also: \cite{abreu23}
+\end{frame}
+%
+%
+\begin{frame}{\cite{caglayan2020}Technical potential of salt caverns for hydrogen storage in Europe}
+\end{frame}
+
+
+\begin{frame}{\cite{li2021investigation} Investigation of thermal-mechanical effects on salt cavern during cycling loading}
+Thermo-dependent salt creep. Thermo mechanical simulation. Pressure cycles, collapse and tensile fractures.
+\end{frame}
+
+\begin{frame}[shrink=30,fragile]{\cite{coarita23} Hydromechanical modelling of salt caverns subjected to cyclic hydrogen injection and withdrawal}
+2D models, to consder cyclic loading, with fundamental creep and plasticity. Storage depths varying from 350 to 1350m. They claim the deeper is more mechanically unstable. They find the caverns are feasible.
+
+Regarding formation of hydrogen plume (I could not completely understand the physics yet):
+\begin{quote}
+In addition to the hydromechanical modelling, an analysis of the
+hydrogen extent within the rock mass is carried out. Since water and
+hydrogen are immiscible, we assume hereafter that the threshold
+capillary pressure of rock salt is much higher than hydrogen pressure
+within the cavern due to the nanometric size of pore throats and hence
+no free gas phase will be flowing. Assuming hydrogen is a non-reactive
+solute (no chemical reaction or sorption with salt), we use the following
+mass transport equation to delineate the extent and mass of dissolved
+hydrogen plume. Transport of dissolved H2 is only driven by advection
+(Darcy’s law) and by diffusion, since mechanical dispersion is negligible
+due to the low permeability of the porous medium.
+\end{quote}
+\end{frame}
+%\section{\cite{zhao22} Feasibility analysis of salt cavern gas storage in extremely deep formation: A case study in China}
+%
+%
+%
+%\section{Goals of the caverns}
+%\subsection{Energy storage}
+%\begin{itemize}
+%\item Regulate variations between renewable energy production and peak power demands (\cite{coarita23})
+%\end{itemize}
+%
+%\subsection{Disposal}
+%%\begin{itemize}
+%%\end{itemize}
+%
+%\section{The physics}
+%
+%I see huge concern with geomechanical behavior, targeted to creep, collapse and tensile fracturing. The cyclic behavior of the pressure is a significant difference compared to oil drainage and waterflooding.
+%
+%\begin{itemize}
+%\item Geomechanics: creep, thermal, tensile fracture, shear fractures
+%\item Chemical: dissolution
+%\item Cyclic operations
+%\item Temperature dependent creep
+%\item Plume extension ($H_2$ dissolved in water - percolation of $H_2$ in water saturated rock (?))
+%\item Heat transfer, especially considering cyclic operations
+%\item 
+%\end{itemize}
+
+\begin{frame}[shrink=30,fragile]{References}
+\bibliographystyle{apalike}
+\bibliography{refs}
+\end{frame}
+\end{document}
