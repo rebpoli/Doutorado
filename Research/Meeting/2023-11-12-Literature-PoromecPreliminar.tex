@@ -1,6 +1,7 @@
 \input{beamer_setup.tex}
 
-
+\usepackage{graphicx}
+\graphicspath{ {./png/} }
 
 \institute[UT, Austin]{University of Texas at Austin, PGE}
 
@@ -12,34 +13,6 @@
 \begin{document}
 
 \maketitle
-
-\begin{frame}
-\frametitle{Review of the literature, keywords}
-\begin{itemize}
-\item cjknsa da
-\item cjknsa da
-\item cjknsa da
-\item cjknsa da
-\end{itemize}
-\end{frame}
-
-\begin{frame}{Talk to Hassan Abadi}
-\begin{itemize}
-\item A sponsor: \href{https://www.respec.com/market/energy/caverns-hydrogen-underground-storage/}{RESPEC website}
-\item Impact of the cycles in stability
-\item Low energy density of the caverns ($H_2$)
-\item MIT - Mechanical Integrity Test (using $N_2$)
-\item The brine in long contact with the cavern walls may impact stability?
-\item Overview of projects worldwide? It seems that Canada has a well-set market on storage in caverns
-\item Muri Dussault (???) - Kamy knows him
-\item Adcore - utility company in Canada?
-\item The key of the research is risk and regulation (form companies and governments)
-\item Percolation of H2 in water saturated rock.
-\item Flow in caverns is in open space and mainly gravitational
-\item Well is a critical point! Cement-rock interface, how to ensure seal? Wellbore is a critical point of leakage
-\item Tetsiana (Stanford) - talked about cement
-\end{itemize}
-\end{frame}
 
 \begin{frame}{Workflow (still to fill...)}
 \begin{itemize}
@@ -62,7 +35,24 @@
 	\end{itemize}
 \item Optimize
 \end{itemize}
+\end{frame}
 
+\begin{frame}[shrink=20,fragile]{Talk to Hassan Abadi}
+\begin{itemize}
+\item A sponsor: \href{https://www.respec.com/market/energy/caverns-hydrogen-underground-storage/}{RESPEC website}
+\item Impact of the cycles in stability
+\item Low energy density of the caverns ($H_2$)
+%\item MIT - Mechanical Integrity Test (using $N_2$)
+%\item The brine in long contact with the cavern walls may impact stability?
+\item Overview of projects worldwide? It seems that Canada has a well-set market on storage in caverns
+%\item Muri Dussault (???) - Kamy knows him
+\item Adcore - utility company in Canada?
+\item The key of the research is risk and regulation (form companies and governments)
+\item Percolation of H2 in water saturated rock.
+\item Flow in caverns is in open space and mainly gravitational
+\item Well is a critical point. Cement-rock interface, how to ensure seal? Wellbore is a critical point of leakage
+%\item Tetsiana (Stanford) - talked about cement
+\end{itemize}
 \end{frame}
 
 \begin{frame}{RCGI - Brazil}
@@ -92,7 +82,7 @@ Thermo-dependent salt creep. Thermo mechanical simulation. Pressure cycles, coll
 
 Regarding formation of hydrogen plume (I could not completely understand the physics yet):
 \begin{quote}
-In addition to the hydromechanical modelling, an analysis of the
+In addition to the hydromechanical modeqlling, an analysis of the
 hydrogen extent within the rock mass is carried out. Since water and
 hydrogen are immiscible, we assume hereafter that the threshold
 capillary pressure of rock salt is much higher than hydrogen pressure
@@ -105,10 +95,9 @@ hydrogen plume. Transport of dissolved H2 is only driven by advection
 due to the low permeability of the porous medium.
 \end{quote}
 \end{frame}
-%\section{\cite{zhao22} Feasibility analysis of salt cavern gas storage in extremely deep formation: A case study in China}
-%
-%
-%
+
+\begin{frame}{\cite{zhao22} Feasibility analysis of salt cavern gas storage in extremely deep formation: A case study in China}
+\end{frame}
 %\section{Goals of the caverns}
 %\subsection{Energy storage}
 %\begin{itemize}
@@ -119,21 +108,24 @@ due to the low permeability of the porous medium.
 %%\begin{itemize}
 %%\end{itemize}
 %
-%\section{The physics}
-%
-%I see huge concern with geomechanical behavior, targeted to creep, collapse and tensile fracturing. The cyclic behavior of the pressure is a significant difference compared to oil drainage and waterflooding.
-%
-%\begin{itemize}
-%\item Geomechanics: creep, thermal, tensile fracture, shear fractures
-%\item Chemical: dissolution
-%\item Cyclic operations
-%\item Temperature dependent creep
-%\item Plume extension ($H_2$ dissolved in water - percolation of $H_2$ in water saturated rock (?))
-%\item Heat transfer, especially considering cyclic operations
-%\item 
-%\end{itemize}
+\begin{frame}{The physics behind}
+I see concern with geomechanical behavior, targeted to creep, collapse and tensile fracturing. The cyclic behavior of the pressure is a significant difference compared to oil drainage and waterflooding.
+\begin{itemize}
+\item Geomechanics: creep, thermal, tensile fracture, shear fractures
+\item Chemical: dissolution
+\item Cyclic operations
+\item Temperature dependent creep
+\item Plume extension ($H_2$ dissolved in water - percolation of $H_2$ in water saturated rock (?))
+\item Heat transfer, especially considering cyclic operations
+\item Well integrity
+\end{itemize}
+\end{frame}
 
-\begin{frame}[shrink=30,fragile]{References}
+\begin{frame}{IT Setup}
+\includegraphics[width=13cm]{it_archit}
+\end{frame}
+
+\begin{frame}[shrink=50,fragile]{References}
 \bibliographystyle{apalike}
 \bibliography{refs}
 \end{frame}
