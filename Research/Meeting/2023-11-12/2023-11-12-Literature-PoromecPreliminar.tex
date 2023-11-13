@@ -1,7 +1,7 @@
-\input{beamer_setup.tex}
+\input{../inc/beamer_setup.tex}
 
 \usepackage{graphicx}
-\graphicspath{ {./png/} }
+\graphicspath{ {../multimedia/} }
 
 \institute[UT, Austin]{University of Texas at Austin, PGE}
 
@@ -13,6 +13,38 @@
 \begin{document}
 
 \maketitle
+
+\setbeamerfont{frametitle}{size=\small}
+\setbeamerfont{framesubtitle}{size=\tiny}
+
+\begin{frame}{Ideation - overall goals and start narrowing}
+\begin{itemize}
+\item Cavern creation
+	\begin{itemize}
+	\item Chemical reaction
+	\item Circulate fluid and model the size/shape of the cavern
+	\end{itemize}
+\item Volumetrics, cavern design
+	\begin{itemize}
+	\item Given a shape, what is the capacity
+	\item Analytical approach or simple numerics will solve most cases (ref:\cite{maraggi23})
+	\end{itemize}
+\item Risks, legislation
+	\begin{itemize}
+	\item Geomechanics
+	\item Well as a critical feature for leakage - modelling of cement, chemical reactivity, abandonment etc
+	\end{itemize}
+\item Numerics
+	\begin{itemize}
+	\item Complex models for salt creep
+	\item Need to include plasticity
+	\item Need data do calibrate (mechanical data for salt is not abundant - afaik)
+	\item Large displacements need to be considered for long term creep
+	\item Advanced computer architecture (GPUs, ...)
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
 
 \begin{frame}{Workflow (still to fill...)}
 \begin{itemize}
@@ -55,6 +87,21 @@
 \end{itemize}
 \end{frame}
 
+\begin{frame}{Lorena (UT @ Austin)}
+\framesubtitle{\cite{maraggi23} Modeling hydrogen storage capacities, injection and withdrawal cycles in salt caverns: Introducing the GeoH2 salt storage and cycling app}
+\includegraphics[width=10cm]{png/maraggi23}
+\begin{itemize}
+\item Presents the online tool GeoH\textsubscript{2} to calculate overall aspects of a salt cavern (volumetrics, pressure, flow rate etc).
+\item Considers simple geometries (spherical, cylindrical)
+\item Mainly analytical work
+\item Discusses the physics involved
+\item Does not assess risks and geomechanics
+\item Conclusions could be more clear "there are \textit{many} (...) technical challenges that still need ..." sounds too generic (which challenges?)
+\end{itemize}
+\end{frame}
+
+%
+%
 \begin{frame}{RCGI - Brazil}
 \framesubtitle{\cite{goulart20} Technology readiness assessment of ultra-deep salt caverns for carbon capture and storage in Brazil}
 \begin{itemize}
@@ -69,6 +116,35 @@ See also: \cite{abreu23}
 \end{frame}
 %
 %
+%
+%
+\begin{frame}[shrink=20, fragile]
+\frametitle{PUCRIO - Investigation of well abandonment relying on salt creep}
+\framesubtitle{\cite{firme23} - Geomechanics of salt towards natural barriers for the abandonment of pre-salt wells in Brazil}
+
+\begin{columns}
+\begin{column}{0.5\textwidth}
+	\begin{itemize}
+		\item Geomechanical study -- risk assessment.
+		\item Proof of concept: can we abandon a well without cementing, just relying on natural closure after salt creep?
+		\item 2D modelling of a well closure considering salt creep
+		\item It seems to me that they used linear elastic, small strains FEM - which might not be good enough in this case
+		\item Deviatoric stress up to 15MPa -- seems high to me, after creep
+		\item Conclusion: creep takes too much time! (I think the study must be refined)
+		\item EDMT - Enhanced Double Mechanism Creep Model (Pedro develloped during Phd - there's a thesis for that)
+	\end{itemize}
+\end{column}
+\begin{column}{0.5\textwidth}  %%<--- here
+    \begin{center}
+     \includegraphics[width=\textwidth]{png/firme23}
+     \end{center}
+\end{column}
+\end{columns}
+
+\end{frame}
+%
+%
+
 \begin{frame}{\cite{caglayan2020}Technical potential of salt caverns for hydrogen storage in Europe}
 \end{frame}
 
@@ -122,7 +198,7 @@ I see concern with geomechanical behavior, targeted to creep, collapse and tensi
 \end{frame}
 
 \begin{frame}{IT Setup}
-\includegraphics[width=13cm]{it_archit}
+\includegraphics[width=13cm]{png/it_archit}
 \end{frame}
 
 \begin{frame}[shrink=50,fragile]{References}

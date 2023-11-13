@@ -1,0 +1,64 @@
+\begin{thebibliography}{}
+
+\bibitem[Abreu et~al., 2023]{abreu23}
+Abreu, J.~F., Costa, A.~M., Costa, P.~V., Miranda, A.~C., Zheng, Z., Wang, P.,
+  Goulart, M.~B., Bergsten, A., Ebecken, N.~F., Bittencourt, C.~H., et~al.
+  (2023).
+\newblock Large-scale storage of hydrogen in salt caverns for carbon footprint
+  reduction.
+\newblock {\em International Journal of Hydrogen Energy}, 48(38):14348--14362.
+
+\bibitem[Caglayan et~al., 2020]{caglayan2020}
+Caglayan, D.~G., Weber, N., Heinrichs, H.~U., Lin{\ss}en, J., Robinius, M.,
+  Kukla, P.~A., and Stolten, D. (2020).
+\newblock Technical potential of salt caverns for hydrogen storage in europe.
+\newblock {\em International Journal of Hydrogen Energy}, 45(11):6793--6805.
+
+\bibitem[Coarita-Tintaya et~al., 2023]{coarita23}
+Coarita-Tintaya, E.-D., Golfier, F., Grgic, D., Souley, M., and Cheng, L.
+  (2023).
+\newblock Hydromechanical modelling of salt caverns subjected to cyclic
+  hydrogen injection and withdrawal.
+\newblock {\em Computers and Geotechnics}, 162:105690.
+
+\bibitem[Costa, 1984]{maia1984}
+Costa, A. (1984).
+\newblock An application of computing methods and principles of rock mechanics
+  in the project and analysis of underground excavations intended to
+  underground mining.
+\newblock {\em UFRJ.}
+
+\bibitem[Firme et~al., 2023]{firme23}
+Firme, P.~A., Roehl, D., Mejia, C., and Romanel, C. (2023).
+\newblock Geomechanics of salt towards natural barriers for the abandonment of
+  pre-salt wells in brazil.
+\newblock {\em Geoenergy Science and Engineering}, 228:211849.
+
+\bibitem[Goulart et~al., 2020]{goulart20}
+Goulart, M. B.~R., da~Costa, P. V.~M., da~Costa, A.~M., Miranda, A.~C., Mendes,
+  A.~B., Ebecken, N.~F., Meneghini, J.~R., Nishimoto, K., and Assi, G.~R.
+  (2020).
+\newblock Technology readiness assessment of ultra-deep salt caverns for carbon
+  capture and storage in brazil.
+\newblock {\em International Journal of Greenhouse Gas Control}, 99:103083.
+
+\bibitem[Li et~al., 2021]{li2021investigation}
+Li, W., Nan, X., Chen, J., and Yang, C. (2021).
+\newblock Investigation of thermal-mechanical effects on salt cavern during
+  cycling loading.
+\newblock {\em Energy}, 232:120969.
+
+\bibitem[Maraggi and Moscardelli, 2023]{maraggi23}
+Maraggi, L. M.~R. and Moscardelli, L.~G. (2023).
+\newblock Modeling hydrogen storage capacities, injection and withdrawal cycles
+  in salt caverns: Introducing the geoh2 salt storage and cycling app.
+\newblock {\em International Journal of Hydrogen Energy}.
+
+\bibitem[Zhao et~al., 2022]{zhao22}
+Zhao, K., Liu, Y., Li, Y., Ma, H., Hou, W., Yu, C., Liu, H., Feng, C., and
+  Yang, C. (2022).
+\newblock Feasibility analysis of salt cavern gas storage in extremely deep
+  formation: A case study in china.
+\newblock {\em Journal of Energy Storage}, 47:103649.
+
+\end{thebibliography}
