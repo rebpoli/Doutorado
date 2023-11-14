@@ -17,6 +17,60 @@
 \setbeamerfont{frametitle}{size=\small}
 \setbeamerfont{framesubtitle}{size=\tiny}
 
+\begin{frame}{Poromec - a 3D poroelastic solver with explicit fractures}
+\begin{itemize}
+	\item Poroelastic solver (non linear to cope with fracture flow)
+	\item Validated with Terzaghi and mandel solution
+	\item Validating now fracture mechanics (working good so far...)
+	\item Non-structured. gmsh generates the mesh
+	\item Integrated to cmake and parallel computing in LNCC (sdumont)
+\end{itemize}
+\vspace{10pt}
+I am using the solver to a final project in geomechanics course.
+
+The idea is to exercise homogeneization of mechanical and poroelastic parameters in a fractured media.
+\end{frame}
+
+\begin{frame}{IT Setup}
+\includegraphics[width=13cm]{png/it_archit}
+\end{frame}
+
+\begin{frame}{Pure normal opening}
+\includegraphics[width=9cm]{png/poromec-fracture-pure-normal}
+\end{frame}
+
+\begin{frame}{Pure shear opening}
+\includegraphics[width=9cm]{png/poromec-fracture-pure-shear}
+\end{frame}
+
+\begin{frame}{Mesh design - GMSH}
+\includegraphics[width=9cm]{png/poromec-fracture-media}
+\end{frame}
+
+\begin{frame}{Dilated fractures}
+\includegraphics[width=9cm]{png/poromec-dilated-fractures}
+\end{frame}
+
+\begin{frame}[fragile]{Preliminary results}
+\begin{verbatim}
+E(input):1.70e+10
+K(input):9.44e+09
+K(output):5.59e+09
+eps:5.17e-07
+sxx:2.82e+03
+syy:2.84e+03
+szz:3.01e+03
+sxy:-8.04e+00
+syz:-5.70e-01
+sxz:1.49e+00
+sm:2.89e+03
+tri_dx:1.03e-05
+tri_dy:1.03e-05
+tri_dz:5.29e-06
+\end{verbatim}
+
+\end{frame}
+
 \begin{frame}{Ideation - overall goals and start narrowing}
 \begin{itemize}
 \item Cavern creation
@@ -195,10 +249,6 @@ I see concern with geomechanical behavior, targeted to creep, collapse and tensi
 \item Heat transfer, especially considering cyclic operations
 \item Well integrity
 \end{itemize}
-\end{frame}
-
-\begin{frame}{IT Setup}
-\includegraphics[width=13cm]{png/it_archit}
 \end{frame}
 
 \begin{frame}[shrink=50,fragile]{References}
