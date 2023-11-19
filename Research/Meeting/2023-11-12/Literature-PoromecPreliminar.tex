@@ -8,7 +8,7 @@
 \title[Num modelling of salt caverns]{Numerical modelling of salt caverns}
 \subtitle{Literature assessment, brainstorming}
 \author[RPoli]{Renato Poli}
-\date{November 12, 2023}
+\date{November 19, 2023}
 
 \begin{document}
 
@@ -29,6 +29,105 @@
 I am using the solver to a final project in geomechanics course.
 
 The idea is to exercise homogeneization of mechanical and poroelastic parameters in a fractured media.
+\end{frame}
+
+\begin{frame}{Poromec - formulation}
+\framesubtitle{Poroelasticity mechanics}
+Mechanical equilibrium:
+\begin{align*}
+  \sigma_{ij,j} = 0
+\end{align*}
+
+\begin{equation*}
+\begin{aligned}[c]
+  &  \sigma_{ij}  = \sigma_{ij}' - \alpha_{ij}\ p  \\
+  &  \sigma_{ij}' = C_{ijkl}\ e_{kl} \\
+\end{aligned}
+\qquad\qquad
+\begin{aligned}[c]
+    & e_{kl} = \frac{1}{2} ( u_{k,l} + u_{l,k} ) \\
+    & \sigma_{ij}' = C_{ijkl}\ u_{k,l}\\
+\end{aligned}
+\end{equation*}
+
+Finite element formulation:
+\begin{align*}   
+      u_k^\gamma \int_\Omega C_{ijkl}\ \phi^\gamma_{,l}\ \psi_{,j}^\beta\ d\Omega
+    + p^\gamma \int_\Omega \alpha\ \delta_{ij}\ \phi_{,j}\ \psi^\beta\ d\Omega = 
+      \textcolor{blue}{\int_\Gamma \sigma_{ij}'\ n_j\ \psi^\beta\ d\Gamma}
+\end{align*}
+\end{frame}
+
+\begin{frame}{Poromec - formulation}
+\framesubtitle{Fracture mechanics}
+\begin{columns}[T] % align columns
+\begin{column}{.48\textwidth}
+Tensor rotation
+\begin{align*}
+    &T_{ij} = R_{ki}\ R_{lj}\ \overline{T}_{kl}\\\\
+    &\overline{E}_{kl} = \overline{E}_{kl}(d, \overline{\delta}_l) = 
+        \begin{bmatrix} 
+            \overline{E_n}  & -                & -                 \\
+                       -    & \overline{E_s}   &  -                \\
+                       -    &       -          & \overline{E_t}   \\
+        \end{bmatrix}\\   \\
+    &t_i = R_{ki}\ R_{lj}\ \overline{E}_{kl}\ (u_j^+ - u_j^-)   \\
+\end{align*}
+\end{column}%
+\hfill%
+\begin{column}{.48\textwidth}
+\includegraphics[width=\textwidth]{pdf/fracture}
+\end{column}%
+\end{columns}
+\begin{align*}
+    \textcolor{blue}{\int_\Gamma t_i\ \psi^\beta\ d\Gamma}
+&=  \int_\Gamma E_{ij}\ u_j^{+\gamma}\phi^{+\gamma}\ \psi^\beta\ d\Gamma
+-   \int_\Gamma E_{ij}\ u_j^{-\gamma}\phi^{-\gamma}\ \psi^\beta\ d\Gamma
+\end{align*}
+\end{frame}
+
+\begin{frame}{Poromec - formulation}
+\framesubtitle{Poroelasticity hydraulic}
+Hydraulic continuity:
+\begin{align*}
+    &\dot{\zeta} + q_{k,k} = Q_{src}\\\\
+    &\alpha\ \dot{\epsilon_{kk}} + S_\epsilon\ \dot{p} - \frac{\kappa}{\mu} p_{,kk} = Q_{src}    
+\end{align*}
+
+Finite element formulation:
+\begin{align*}
+    S_\epsilon\ \dot{p}^\gamma\int_\Omega\phi^\gamma\ \psi^\beta d\Omega +
+    \frac{\kappa}{\mu}\ p^\gamma\int_\Omega\phi_{,k}^\gamma\ \psi_{,k}^\beta\ d\Omega +
+    \dot{u_{k}}^\gamma\ \alpha\int_\Omega\phi_{,k} ^\gamma\ \psi^\beta\ d\Omega =
+    \textcolor{blue}{\int_\Gamma q_n\ \psi^\beta\ d\Gamma}
+\end{align*}
+\end{frame}
+
+\begin{frame}{Poromec - formulation}
+\framesubtitle{Fracture hydraulics}
+\begin{align*}
+   & q_{k,k} + \dot{\delta} = 0 \\\\
+   & \overline{q_\xi} = - \frac{\delta^2}{12\mu} p_{,\xi} \quad \rightarrow \quad \int_0^\delta q_\xi\ d\eta = \frac{-\delta^3}{12\mu} p_{,\xi}\\\\
+   & - \int_\Gamma q_k\ n_k\ \psi\ d\Gamma = \frac{1}{12\mu}\int_\xi \delta^3\ p_{,\xi}\ \psi_{,\xi}\ d\xi + \int_\Gamma \dot{\delta}\ \psi\ d\Gamma \\\\
+   & - \textcolor{blue}{\int_\Gamma q_k\ n_k\ \psi\ d\Gamma} = \frac{1}{12\mu}\int_\xi \textcolor{red}{\kappa} \ p_{,\xi}\ \psi_{,\xi}\ d\xi + \int_\Gamma \dot{\delta}\ \psi\ d\Gamma
+\end{align*}
+\end{frame}
+
+\begin{frame}[fragile]{Results - mechanics}
+\begin{columns}[T] % align columns
+\begin{column}{.48\textwidth}
+K(input):9.44e+09\\
+K(output):2.34e+09\\
+$\rightarrow$ 75\% reduction
+\end{column}
+\begin{column}{.48\textwidth}
+\includegraphics[width=\textwidth]{png/poromec-fracture-full.png}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Results - hydraulics}
+\includegraphics[scale=.5]{png/poromec-fracture-open-flow.png}
 \end{frame}
 
 \begin{frame}{IT Setup}
@@ -251,7 +350,7 @@ I see concern with geomechanical behavior, targeted to creep, collapse and tensi
 \end{itemize}
 \end{frame}
 
-\begin{frame}[shrink=50,fragile]{References}
+\begin{frame}[shrink=50, fragile]{References}
 \bibliographystyle{apalike}
 \bibliography{refs}
 \end{frame}
