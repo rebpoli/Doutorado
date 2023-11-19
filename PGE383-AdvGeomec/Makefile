@@ -1,13 +1,12 @@
 SHELL := /bin/bash
 
-_pyenv:
-	python3 -m venv _pyenv
-install: _pyenv
-	source _pyenv/bin/activate && pip3 install packaging jupyter pandas numpy matplotlib openpyxl scipy
+VENV := $(HOME)/.local/python_venv/_pyenv
 
-activate:
-	source _pyenv/bin/activate
+_pyenv:
+	python3 -m $(VENV)
+install: _pyenv
+	source $(VENV)/bin/activate && pip3 install packaging jupyter pandas numpy matplotlib openpyxl scipy
 
 notebook:
-	source _pyenv/bin/activate && jupyter notebook
+	source $(VENV)/bin/activate && jupyter notebook
 
