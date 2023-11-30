@@ -18,8 +18,6 @@ real G = E/(2*(1+nu )) ; // shear modulus
 real lambda = E*nu/((1+nu)*(1-2*nu)) ; // Lame constant
 
 //Stresses
-// real Sx = 43.437e6 ;
-// real Sy = 44.126e6 ;
 real Pfrac = 2.8668e6;
 
 // w=0.004 => P_net=1.1467e6
@@ -31,7 +29,6 @@ real Pfrac = 2.8668e6;
 real xf = 45.72; // fracture half-length
 real fw = .000; // fracture half-width
 
-
 //--------------------------------------------------------------------
 // First define boundaries 
 border Right(t=ya, yb){x=xb;y=t;}
@@ -40,7 +37,6 @@ border Left1(t=yb,(ya+ySize/2+xf)){x=xa;y=t;}
 border Frac(t = -pi/2, pi/2) {x = fw*cos(t); y = xf*sin(-t);}
 border Left2(t=(ya+ySize/2-xf), ya){x=xa;y=t;}
 border Bottom(t=xa,xb){x=t;y=ya;} 
-
 
 //SHOW DOMAIN
 plot( Right(10)+Top(10)+Left1(10), Left2(10) +Bottom(10) +Frac(40), wait=true);
@@ -61,7 +57,6 @@ fespace Stress(Omega, P2); // piecewise constants
 Displacement u1, u2, v1, v2;
 Stress sigmaxx, sigmayy, sigmaxy;
 
-
 //--------------------------------------------------------------------
 // definition of 2 macros : 
 // macro for strain 
@@ -81,7 +76,6 @@ macro sigma(u1,u2)
 		lambda*e(u1,u2)[0]+(lambda+2.*G)*e(u1,u2)[3]
 	] //stress s_xx, s_xy, s_yx, s_yy
 
-	
 	// Define system of equations
 problem Elasticity([u1,u2], [v1,v2]) =
     int2d(Omega) (  sigma(u1,u2)'*e(v1,v2)  )
@@ -95,31 +89,25 @@ problem Elasticity([u1,u2], [v1,v2]) =
   + int1d(Omega, Frac) (Pfrac*(N.x*v1))
   ;
 
-
-	
 //--------------------------------------------------------------------	
 //	Solve system
 Elasticity;
-
 
 // Stresses 
 sigmaxx = sigma(u1,u2)[0];
 sigmayy = sigma(u1,u2)[3]; 
 sigmaxy = sigma(u1,u2)[1];	// we could	use	[2]	as	well
 
-
 //--------------------------------------------------------------------
 // plot on the deformed surface
 mesh Th=movemesh(Omega,[x+10*u1,y+10*u2]);
 plot(Th,cmm="Deformed configuration",wait=1);
-
 
 // plot the deformation field and stress
 plot([u1,u2],coef=10,cmm="Displacement field",wait=1,value=true);
 plot(sigmaxx,fill=1, cmm="Stress sigmaxx",wait=1,value=true);
 plot(sigmayy,fill=1, cmm="Stress sigmayy",wait=1,value=true);
 plot(sigmaxy,fill=1, cmm="Stress sigmaxy",wait=1,value=true);
-
 
 // Write stress field
 ofstream ff("FractureShadow.dat");
@@ -151,33 +139,3 @@ for(int i=0;i<1000;i++) {
     <<", "<< sigmaxy(xline,yline)
     <<endl;
 }
-
-
-//// Write displacement along the fracture wall
-//ofstream ffw("FractureWall.dat");
-//ffw << "x,y,u1,u2" << endl;
-//for(int i=0;i<1000;i++) {
-//  real t = -pi/2 + pi * i / 1000. ;
-//  real x = fw * cos(t) ;
-//  real y = xf * sin(-t) ;
-//
-//  ffw<< x <<","<< y <<","<< u1(x,y) << "," << u2(x,y) << endl;
-//}
-//
-//// Along X=0
-//ofstream ffx0("Along_X_equals_0.dat");
-//ffx0 << "x,y,u1,u2,sxx,syy,sxy" << endl;
-//for(int i=0;i<1000;i++) {
-//  real x = 0;
-//  real y = ya + ySize/1000*i;
-//
-//  ffx0 << x << "," << y 
-//       << "," << u1(x,y) 
-//       << "," << u2(x,y) 
-//       << "," << sigmaxx(x,y)
-//       << "," << sigmayy(x,y)
-//       << "," << sigmaxy(x,y) 
-//       << endl;
-//}
-
-//savevtk("Fracture.vtk",Omega,[u1,u2,0],sigmaxx,sigmayy,0,sigmaxy,0,0,dataname="u sigmaXX sigmaYY sigmaZZ sigmaXY sigmaYZ sigmaXZ");
