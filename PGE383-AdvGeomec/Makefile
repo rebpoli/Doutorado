@@ -1,13 +1,17 @@
 SHELL := /bin/bash
 
-_pyenv:
-	python3 -m venv _pyenv
-install: _pyenv
-	source _pyenv/bin/activate && pip3 install packaging jupyter pandas numpy matplotlib openpyxl scipy
+VENV := $(HOME)/.local/python_venv/Geomec
+PIP := $(VENV)/bin/pip3
+PY3 := $(VENV)/bin/python3
+JUP := $(VENV)/bin/jupyter
 
-activate:
-	source _pyenv/bin/activate
+
+venv:
+	python3 -m venv $(VENV)
+
+install: venv 
+	source $(VENV)/bin/activate && $(PIP) install packaging jupyter pandas numpy matplotlib openpyxl scipy
 
 notebook:
-	source _pyenv/bin/activate && jupyter notebook
+	source $(VENV)/bin/activate && $(JUP) notebook
 

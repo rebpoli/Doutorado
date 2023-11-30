@@ -1,0 +1,357 @@
+\input{../inc/beamer_setup.tex}
+
+\usepackage{graphicx}
+\graphicspath{ {../multimedia/} }
+
+\institute[UT, Austin]{University of Texas at Austin, PGE}
+
+\title[Num modelling of salt caverns]{Numerical modelling of salt caverns}
+\subtitle{Literature assessment, brainstorming}
+\author[RPoli]{Renato Poli}
+\date{November 19, 2023}
+
+\begin{document}
+
+\maketitle
+
+\setbeamerfont{frametitle}{size=\small}
+\setbeamerfont{framesubtitle}{size=\tiny}
+
+\begin{frame}{Poromec - a 3D poroelastic solver with explicit fractures}
+\begin{itemize}
+	\item Poroelastic solver (non linear to cope with fracture flow)
+	\item Validated with Terzaghi and mandel solution
+	\item Validating now fracture mechanics (working good so far...)
+	\item Non-structured. gmsh generates the mesh
+	\item Integrated to cmake and parallel computing in LNCC (sdumont)
+\end{itemize}
+\vspace{10pt}
+I am using the solver to a final project in geomechanics course.
+
+The idea is to exercise homogeneization of mechanical and poroelastic parameters in a fractured media.
+\end{frame}
+
+\begin{frame}{Poromec - formulation}
+\framesubtitle{Poroelasticity mechanics}
+Mechanical equilibrium:
+\begin{align*}
+  \sigma_{ij,j} = 0
+\end{align*}
+
+\begin{equation*}
+\begin{aligned}[c]
+  &  \sigma_{ij}  = \sigma_{ij}' - \alpha_{ij}\ p  \\
+  &  \sigma_{ij}' = C_{ijkl}\ e_{kl} \\
+\end{aligned}
+\qquad\qquad
+\begin{aligned}[c]
+    & e_{kl} = \frac{1}{2} ( u_{k,l} + u_{l,k} ) \\
+    & \sigma_{ij}' = C_{ijkl}\ u_{k,l}\\
+\end{aligned}
+\end{equation*}
+
+Finite element formulation:
+\begin{align*}   
+      u_k^\gamma \int_\Omega C_{ijkl}\ \phi^\gamma_{,l}\ \psi_{,j}^\beta\ d\Omega
+    + p^\gamma \int_\Omega \alpha\ \delta_{ij}\ \phi_{,j}\ \psi^\beta\ d\Omega = 
+      \textcolor{blue}{\int_\Gamma \sigma_{ij}'\ n_j\ \psi^\beta\ d\Gamma}
+\end{align*}
+\end{frame}
+
+\begin{frame}{Poromec - formulation}
+\framesubtitle{Fracture mechanics}
+\begin{columns}[T] % align columns
+\begin{column}{.48\textwidth}
+Tensor rotation
+\begin{align*}
+    &T_{ij} = R_{ki}\ R_{lj}\ \overline{T}_{kl}\\\\
+    &\overline{E}_{kl} = \overline{E}_{kl}(d, \overline{\delta}_l) = 
+        \begin{bmatrix} 
+            \overline{E_n}  & -                & -                 \\
+                       -    & \overline{E_s}   &  -                \\
+                       -    &       -          & \overline{E_t}   \\
+        \end{bmatrix}\\   \\
+    &t_i = R_{ki}\ R_{lj}\ \overline{E}_{kl}\ (u_j^+ - u_j^-)   \\
+\end{align*}
+\end{column}%
+\hfill%
+\begin{column}{.48\textwidth}
+\includegraphics[width=\textwidth]{pdf/fracture}
+\end{column}%
+\end{columns}
+\begin{align*}
+    \textcolor{blue}{\int_\Gamma t_i\ \psi^\beta\ d\Gamma}
+&=  \int_\Gamma E_{ij}\ u_j^{+\gamma}\phi^{+\gamma}\ \psi^\beta\ d\Gamma
+-   \int_\Gamma E_{ij}\ u_j^{-\gamma}\phi^{-\gamma}\ \psi^\beta\ d\Gamma
+\end{align*}
+\end{frame}
+
+\begin{frame}{Poromec - formulation}
+\framesubtitle{Poroelasticity hydraulic}
+Hydraulic continuity:
+\begin{align*}
+    &\dot{\zeta} + q_{k,k} = Q_{src}\\\\
+    &\alpha\ \dot{\epsilon_{kk}} + S_\epsilon\ \dot{p} - \frac{\kappa}{\mu} p_{,kk} = Q_{src}    
+\end{align*}
+
+Finite element formulation:
+\begin{align*}
+    S_\epsilon\ \dot{p}^\gamma\int_\Omega\phi^\gamma\ \psi^\beta d\Omega +
+    \frac{\kappa}{\mu}\ p^\gamma\int_\Omega\phi_{,k}^\gamma\ \psi_{,k}^\beta\ d\Omega +
+    \dot{u_{k}}^\gamma\ \alpha\int_\Omega\phi_{,k} ^\gamma\ \psi^\beta\ d\Omega =
+    \textcolor{blue}{\int_\Gamma q_n\ \psi^\beta\ d\Gamma}
+\end{align*}
+\end{frame}
+
+\begin{frame}{Poromec - formulation}
+\framesubtitle{Fracture hydraulics}
+\begin{align*}
+   & q_{k,k} + \dot{\delta} = 0 \\\\
+   & \overline{q_\xi} = - \frac{\delta^2}{12\mu} p_{,\xi} \quad \rightarrow \quad \int_0^\delta q_\xi\ d\eta = \frac{-\delta^3}{12\mu} p_{,\xi}\\\\
+   & - \int_\Gamma q_k\ n_k\ \psi\ d\Gamma = \frac{1}{12\mu}\int_\xi \delta^3\ p_{,\xi}\ \psi_{,\xi}\ d\xi + \int_\Gamma \dot{\delta}\ \psi\ d\Gamma \\\\
+   & - \textcolor{blue}{\int_\Gamma q_k\ n_k\ \psi\ d\Gamma} = \frac{1}{12\mu}\int_\xi \textcolor{red}{\kappa} \ p_{,\xi}\ \psi_{,\xi}\ d\xi + \int_\Gamma \dot{\delta}\ \psi\ d\Gamma
+\end{align*}
+\end{frame}
+
+\begin{frame}[fragile]{Results - mechanics}
+\begin{columns}[T] % align columns
+\begin{column}{.48\textwidth}
+K(input):9.44e+09\\
+K(output):2.34e+09\\
+$\rightarrow$ 75\% reduction
+\end{column}
+\begin{column}{.48\textwidth}
+\includegraphics[width=\textwidth]{png/poromec-fracture-full.png}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Results - hydraulics}
+\includegraphics[scale=.5]{png/poromec-fracture-open-flow.png}
+\end{frame}
+
+\begin{frame}{IT Setup}
+\includegraphics[width=13cm]{png/it_archit}
+\end{frame}
+
+\begin{frame}{Pure normal opening}
+\includegraphics[width=9cm]{png/poromec-fracture-pure-normal}
+\end{frame}
+
+\begin{frame}{Pure shear opening}
+\includegraphics[width=9cm]{png/poromec-fracture-pure-shear}
+\end{frame}
+
+\begin{frame}{Mesh design - GMSH}
+\includegraphics[width=9cm]{png/poromec-fracture-media}
+\end{frame}
+
+\begin{frame}{Dilated fractures}
+\includegraphics[width=9cm]{png/poromec-dilated-fractures}
+\end{frame}
+
+\begin{frame}[fragile]{Preliminary results}
+\begin{verbatim}
+E(input):1.70e+10
+K(input):9.44e+09
+K(output):5.59e+09
+eps:5.17e-07
+sxx:2.82e+03
+syy:2.84e+03
+szz:3.01e+03
+sxy:-8.04e+00
+syz:-5.70e-01
+sxz:1.49e+00
+sm:2.89e+03
+tri_dx:1.03e-05
+tri_dy:1.03e-05
+tri_dz:5.29e-06
+\end{verbatim}
+
+\end{frame}
+
+\begin{frame}{Ideation - overall goals and start narrowing}
+\begin{itemize}
+\item Cavern creation
+	\begin{itemize}
+	\item Chemical reaction
+	\item Circulate fluid and model the size/shape of the cavern
+	\end{itemize}
+\item Volumetrics, cavern design
+	\begin{itemize}
+	\item Given a shape, what is the capacity
+	\item Analytical approach or simple numerics will solve most cases (ref:\cite{maraggi23})
+	\end{itemize}
+\item Risks, legislation
+	\begin{itemize}
+	\item Geomechanics
+	\item Well as a critical feature for leakage - modelling of cement, chemical reactivity, abandonment etc
+	\end{itemize}
+\item Numerics
+	\begin{itemize}
+	\item Complex models for salt creep
+	\item Need to include plasticity
+	\item Need data do calibrate (mechanical data for salt is not abundant - afaik)
+	\item Large displacements need to be considered for long term creep
+	\item Advanced computer architecture (GPUs, ...)
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Workflow (still to fill...)}
+\begin{itemize}
+\item Understand the problem
+	\begin{itemize}
+		\item Overall picture
+		\item Where it is applied
+		\item Main challenges
+		\item Accidents?
+		\item Risks, regulations
+    \end{itemize}
+\item Prototype
+	\begin{itemize}
+		\item Proof of concepts - currently using PoroMec (own simulator)
+		\item Standalone software
+	\end{itemize}
+\item Case study
+	\begin{itemize}
+		\item 
+	\end{itemize}
+\item Optimize
+\end{itemize}
+\end{frame}
+
+\begin{frame}[shrink=20,fragile]{Talk to Hassan Abadi}
+\begin{itemize}
+\item A sponsor: \href{https://www.respec.com/market/energy/caverns-hydrogen-underground-storage/}{RESPEC website}
+\item Impact of the cycles in stability
+\item Low energy density of the caverns ($H_2$)
+%\item MIT - Mechanical Integrity Test (using $N_2$)
+%\item The brine in long contact with the cavern walls may impact stability?
+\item Overview of projects worldwide? It seems that Canada has a well-set market on storage in caverns
+%\item Muri Dussault (???) - Kamy knows him
+\item Adcore - utility company in Canada?
+\item The key of the research is risk and regulation (form companies and governments)
+\item Percolation of H2 in water saturated rock.
+\item Flow in caverns is in open space and mainly gravitational
+\item Well is a critical point. Cement-rock interface, how to ensure seal? Wellbore is a critical point of leakage
+%\item Tetsiana (Stanford) - talked about cement
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Lorena (UT @ Austin)}
+\framesubtitle{\cite{maraggi23} Modeling hydrogen storage capacities, injection and withdrawal cycles in salt caverns: Introducing the GeoH2 salt storage and cycling app}
+\includegraphics[width=10cm]{png/maraggi23}
+\begin{itemize}
+\item Presents the online tool GeoH\textsubscript{2} to calculate overall aspects of a salt cavern (volumetrics, pressure, flow rate etc).
+\item Considers simple geometries (spherical, cylindrical)
+\item Mainly analytical work
+\item Discusses the physics involved
+\item Does not assess risks and geomechanics
+\item Conclusions could be more clear "there are \textit{many} (...) technical challenges that still need ..." sounds too generic (which challenges?)
+\end{itemize}
+\end{frame}
+
+%
+%
+\begin{frame}{RCGI - Brazil}
+\framesubtitle{\cite{goulart20} Technology readiness assessment of ultra-deep salt caverns for carbon capture and storage in Brazil}
+\begin{itemize}
+\item Funded by FAPESP RCGI (Research center for gas innovation - \href{https://sites.usp.br/rcgi/br/rgci_br/}{link}). Founder sponsors: Shell and Fapesp.
+\item One of the authors is Alvaro Maia, a ex-Senior Consultant in Petrobras (well drilling, geomechanics).
+\item They study caverns of up to 150x450m, created by dissolution, with geomechanical simulations.
+\item Well is the critical element of an underground storage system, special attention to the cement.
+\item May store 4 billion $Sm^3$
+\item Used simulator COVES, developped by Alvaro Maia in the 1980s (See \cite{maia1984})
+\end{itemize}
+See also: \cite{abreu23}
+\end{frame}
+%
+%
+%
+%
+\begin{frame}[shrink=20, fragile]
+\frametitle{PUCRIO - Investigation of well abandonment relying on salt creep}
+\framesubtitle{\cite{firme23} - Geomechanics of salt towards natural barriers for the abandonment of pre-salt wells in Brazil}
+
+\begin{columns}
+\begin{column}{0.5\textwidth}
+	\begin{itemize}
+		\item Geomechanical study -- risk assessment.
+		\item Proof of concept: can we abandon a well without cementing, just relying on natural closure after salt creep?
+		\item 2D modelling of a well closure considering salt creep
+		\item It seems to me that they used linear elastic, small strains FEM - which might not be good enough in this case
+		\item Deviatoric stress up to 15MPa -- seems high to me, after creep
+		\item Conclusion: creep takes too much time! (I think the study must be refined)
+		\item EDMT - Enhanced Double Mechanism Creep Model (Pedro develloped during Phd - there's a thesis for that)
+	\end{itemize}
+\end{column}
+\begin{column}{0.5\textwidth}  %%<--- here
+    \begin{center}
+     \includegraphics[width=\textwidth]{png/firme23}
+     \end{center}
+\end{column}
+\end{columns}
+
+\end{frame}
+%
+%
+
+\begin{frame}{\cite{caglayan2020}Technical potential of salt caverns for hydrogen storage in Europe}
+\end{frame}
+
+
+\begin{frame}{\cite{li2021investigation} Investigation of thermal-mechanical effects on salt cavern during cycling loading}
+Thermo-dependent salt creep. Thermo mechanical simulation. Pressure cycles, collapse and tensile fractures.
+\end{frame}
+
+\begin{frame}[shrink=30,fragile]{\cite{coarita23} Hydromechanical modelling of salt caverns subjected to cyclic hydrogen injection and withdrawal}
+2D models, to consder cyclic loading, with fundamental creep and plasticity. Storage depths varying from 350 to 1350m. They claim the deeper is more mechanically unstable. They find the caverns are feasible.
+
+Regarding formation of hydrogen plume (I could not completely understand the physics yet):
+\begin{quote}
+In addition to the hydromechanical modeqlling, an analysis of the
+hydrogen extent within the rock mass is carried out. Since water and
+hydrogen are immiscible, we assume hereafter that the threshold
+capillary pressure of rock salt is much higher than hydrogen pressure
+within the cavern due to the nanometric size of pore throats and hence
+no free gas phase will be flowing. Assuming hydrogen is a non-reactive
+solute (no chemical reaction or sorption with salt), we use the following
+mass transport equation to delineate the extent and mass of dissolved
+hydrogen plume. Transport of dissolved H2 is only driven by advection
+(Darcy’s law) and by diffusion, since mechanical dispersion is negligible
+due to the low permeability of the porous medium.
+\end{quote}
+\end{frame}
+
+\begin{frame}{\cite{zhao22} Feasibility analysis of salt cavern gas storage in extremely deep formation: A case study in China}
+\end{frame}
+%\section{Goals of the caverns}
+%\subsection{Energy storage}
+%\begin{itemize}
+%\item Regulate variations between renewable energy production and peak power demands (\cite{coarita23})
+%\end{itemize}
+%
+%\subsection{Disposal}
+%%\begin{itemize}
+%%\end{itemize}
+%
+\begin{frame}{The physics behind}
+I see concern with geomechanical behavior, targeted to creep, collapse and tensile fracturing. The cyclic behavior of the pressure is a significant difference compared to oil drainage and waterflooding.
+\begin{itemize}
+\item Geomechanics: creep, thermal, tensile fracture, shear fractures
+\item Chemical: dissolution
+\item Cyclic operations
+\item Temperature dependent creep
+\item Plume extension ($H_2$ dissolved in water - percolation of $H_2$ in water saturated rock (?))
+\item Heat transfer, especially considering cyclic operations
+\item Well integrity
+\end{itemize}
+\end{frame}
+
+\begin{frame}[shrink=50, fragile]{References}
+\bibliographystyle{apalike}
+\bibliography{refs}
+\end{frame}
+\end{document}
