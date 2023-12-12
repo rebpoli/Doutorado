@@ -61,7 +61,7 @@ Var_mod_A[n,n] = 0
 Var_A_inv = np.linalg.inv(Var_mod_A)
 
 Max_lim = np.ceil(np.max([np.max(x),np.max(y)]))
-divisions = Max_lim / 5
+divisions = int(Max_lim / 5)
 R = np.linspace(0,Max_lim,divisions+1,True)
 Xg1,Xg2 = np.meshgrid(R,R)
 

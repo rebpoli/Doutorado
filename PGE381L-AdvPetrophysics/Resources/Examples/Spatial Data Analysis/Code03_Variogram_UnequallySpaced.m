@@ -59,22 +59,15 @@ set(gca,'XGrid','on','YGrid','on','LineWidth',2);
 lags=0:max(H_Var);
 
 %% Spherical model with nugget
-% Change the constants to get a reasonable match
-nugget = 0;
-C = 0.8;
-range = 40;
-Bsph = nugget + (C*(1.5*lags/range-0.5*(lags/...
-   range).^3).*(lags<=range)+ C*(lags>range));
-plot(lags,Bsph,'-','color',[1 0 0],'Linewidth',2)
+% % Change the constants to get a reasonable match
+% nugget = 0;
+% C = 0.8;
+% range = 45;
+% Bsph = nugget + (C*(1.5*lags/range-0.5*(lags/...
+%    range).^3).*(lags<=range)+ C*(lags>range));
+% plot(lags,Bsph,'-','color',[1 0 0],'Linewidth',2)
 
-nugget = 0;
-C = 0.8;
-range = 50;
-Bsph = nugget + (C*(1.5*lags/range-0.5*(lags/...
-   range).^3).*(lags<=range)+ C*(lags>range));
-plot(lags,Bsph,'-','color',[1 0 0],'Linewidth',2)
  
-
 %% Exponential model with nugget
 % % Change the constants to get a reasonable match
 % 

@@ -84,7 +84,7 @@ plt.grid(zorder=0, linestyle='--')
 
 # %% Analytical Models
 
-maxH_Var = np.max(H_Var)
+maxH_Var = int(np.max(H_Var))
 lags = np.linspace(0,maxH_Var,maxH_Var+1,True)
 
 # %% Spherical model with nugget
