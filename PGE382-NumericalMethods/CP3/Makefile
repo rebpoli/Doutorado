@@ -1,0 +1,3 @@
+
+pdf:
+	nbtopdf CP3
