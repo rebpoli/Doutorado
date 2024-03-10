@@ -15,3 +15,5 @@ install: venv
 notebook:
 	source $(VENV)/bin/activate && $(JUP) notebook
 
+
+# rm ~/.cache/matplotlib -rf
