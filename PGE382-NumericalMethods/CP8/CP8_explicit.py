@@ -8,12 +8,13 @@ from numpy import exp, linspace, vectorize
 import matplotlib.pyplot as plt
 plt.style.use('paper.mplstyle')
 
-dx = 0.05 ; dy = dx/2
-Tf = 0.1 ; Nt=1000
+XMAX = 100
+YMAX = 25
+dx = XMAX/10 ; dy = YMAX/10
+Tf = 80 ; Nt=160
 dt = Tf/Nt ; Nt = Nt + 1
-
-X = np.arange(0,1+dx,dx) ; Ni = len(X)
-Y = np.arange(0,1+dy,dy) ; Nj = len(Y)
+X = np.arange(0,XMAX+dx,dx) ; Ni = len(X)
+Y = np.arange(0,YMAX+dy,dy) ; Nj = len(Y)
 Nij = Ni * Nj
 
 beta = 0.5
@@ -40,7 +41,6 @@ def init_bcs() :
     Tnij[:,:,0] = 1 # BC , Y=0
 
     Unij[:,:,-1] = 0 # BC , Y=inf
-    Vnij[:,:,-1] = 0 # BC , Y=inf
     Tnij[:,:,-1] = 0 # BC , Y=inf
 
     Unij[:,0,:] = 0 # BC , X=0
@@ -86,13 +86,13 @@ for n in arange(1,Nt) :
 
     # Solve V
     for i in arange(1,Ni) :
-        for j in arange(1,Nj-1) :
+        for j in arange(1,Nj) :
             Vnij[n,i,j] = Vnij[n,i,j-1] - dy/dx*( Unij[n,i,j] - Unij[n,i-1,j])
 
 
     
 #%%
-for n in arange(0,Nt,100) :
+for n in arange(0,Nt,10) :
     fig, [ax1,ax2,ax3] = plt.subplots(1,3, figsize=[10,5])    
     ax1.imshow( Tnij[n,:,:] )
     ax1.set_title(f"T @ {n}")

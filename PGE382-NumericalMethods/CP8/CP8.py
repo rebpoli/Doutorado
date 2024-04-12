@@ -8,15 +8,16 @@ from numpy import exp, linspace, vectorize
 import matplotlib.pyplot as plt
 plt.style.use('paper.mplstyle')
 
-dx = 0.05 ; dy = dx/2
-Tf = 0.1 ; Nt=10
+XMAX = 100
+YMAX = 25
+dx = XMAX/10 ; dy = YMAX/10
+Tf = 80 ; Nt=160
 dt = Tf/Nt ; Nt = Nt + 1
-
-X = np.arange(0,1+dx,dx) ; Ni = len(X)
-Y = np.arange(0,1+dy,dy) ; Nj = len(Y)
+X = np.arange(0,XMAX+dx,dx) ; Ni = len(X)
+Y = np.arange(0,YMAX+dy,dy) ; Nj = len(Y)
 Nij = Ni * Nj
 
-beta = 0.5
+beta = .5
 Pr = 0.733
 
 # Global index
@@ -85,12 +86,19 @@ def cF3(i, j, U, V, T, Un, Vn, Tn) :
 
 # The list of free and prescribed dofs
 def build_Df() :
-    global DOF_f, Ni, Nj
+    global U_doff, V_doff, T_doff, Ni, Nj
 
-    DOF_f=[]
+    U_doff=[]
+    T_doff=[]
     for i in arange(1,Ni) :
         for j in arange(1,Nj-1) :
-            DOF_f.append( _(i,j) )
+            U_doff.append( _(i,j) )
+            T_doff.append( _(i,j) )
+
+    V_doff=[]
+    for i in arange(1,Ni) :
+        for j in arange(1,Nj) :
+            V_doff.append( _(i,j) )
 
 
 #
@@ -111,7 +119,6 @@ def init_bcs() :
     Tnij[:,:,0] = 1 # BC , Y=0
 
     Unij[:,:,-1] = 0 # BC , Y=inf
-    Vnij[:,:,-1] = 0 # BC , Y=inf
     Tnij[:,:,-1] = 0 # BC , Y=inf
 
     Unij[:,0,:] = 0 # BC , X=0
@@ -133,6 +140,8 @@ def build_force() :
             _ij = _(i,j)
             F1[_ij] += cF1(i,j,Uk,Vk,Tk,Un,Vn,Tn)
             F2[_ij] += cF2(i,j,Uk,Vk,Tk,Un,Vn,Tn)
+    for i in arange(1,Ni) :
+        for j in arange(1,Nj) :
             F3[_ij] += cF3(i,j,Uk,Vk,Tk,Un,Vn,Tn)
 
 #
@@ -209,6 +218,13 @@ def build_jacobian() :
             J2T[_ij,_ij] += -beta * Vk[_ij] /dy
             J2T[_ij,_i0] += beta * Vk[_ij] /dy
 
+    for i in arange(1,Ni) :
+        for j in arange(1,Nj) :
+            _ij = _(i,j)
+            _0j = _(i-1,j)
+            _1j = _(i+1,j)
+            _i0 = _(i,j-1)
+            _i1 = _(i,j+1)
             # F3
             #               
             #1 = dU/dx
@@ -229,13 +245,12 @@ def linear_solve( ) :
     global J1U, J1V, J1T, J2U, J2V, J2T, J3U, J3V, J3T
     global F1, F2, F3
     global JAC, FORCE
+    global U_doff, V_doff, T_doff
 
-    J_ix = ix( DOF_f, DOF_f )
-    F_ix = ix( DOF_f )
-    JAC = np.block([[ J1U[J_ix], J1V[J_ix], J1T[J_ix]], 
-                    [ J2U[J_ix], J2V[J_ix], J2T[J_ix]], 
-                    [ J3U[J_ix], J3V[J_ix], J3T[J_ix]] ])
-    FORCE = np.block([ F1[F_ix], F2[F_ix], F3[F_ix] ])
+    JAC = np.block([[ J1U[ix(U_doff,U_doff)], J1V[ix(U_doff,V_doff)], J1T[ix(U_doff,T_doff)]], 
+                    [ J2U[ix(T_doff,U_doff)], J2V[ix(T_doff,V_doff)], J2T[ix(T_doff,T_doff)]], 
+                    [ J3U[ix(V_doff,U_doff)], J3V[ix(V_doff,V_doff)], J3T[ix(V_doff,T_doff)]] ])
+    FORCE = np.block([ F1[ix(U_doff)], F2[ix(T_doff)], F3[ix(V_doff)] ])
 
     dX = np.linalg.solve( JAC, -FORCE )
     
@@ -243,10 +258,12 @@ def linear_solve( ) :
     dUk = np.zeros(Nij)
     dVk = np.zeros(Nij)
     dTk = np.zeros(Nij)
-    bl = np.shape(F_ix)[1] # block length
-    dUk[F_ix] = dX[:bl]
-    dVk[F_ix] = dX[bl:2*bl]
-    dTk[F_ix] = dX[2*bl:]
+    bl1 = len(U_doff) # block length
+    bl2 = len(V_doff) # block length
+    bl3 = len(T_doff) # block length
+    dUk[ix(U_doff)] = dX[:bl1]
+    dVk[ix(V_doff)] = dX[bl1:(bl1+bl2)]
+    dTk[ix(T_doff)] = dX[(bl1+bl2):]
     
     err = np.linalg.norm(dX)
 
@@ -292,7 +309,7 @@ for n in arange(1,Nt) :
         # Check for convergence
         nk += 1
         print(f"   Newton iteration #{nk} ... (err={err:.3e})")
-        if err < 1e-13 : break
+        if err < 1e-15 : break
         if nk > 50 : break
     
     Unij[n,:,:] = Uk.reshape(Ni,Nj)
@@ -300,13 +317,21 @@ for n in arange(1,Nt) :
     Tnij[n,:,:] = Tk.reshape(Ni,Nj)
     
 #%%
-for n in arange(0,Nt) :
+for n in arange(0,Nt,10) :
     fig, [ax1,ax2,ax3] = plt.subplots(1,3, figsize=[10,5])    
-    ax1.imshow( Tnij[n,:,:] )
+    pcm=ax1.imshow( Tnij[n,:,:] )
+    cb1 = fig.colorbar(pcm, ax=ax1, location='bottom', pad=.07)
+    pcm=ax2.imshow( Unij[n,:,:] )
+    cb2 = fig.colorbar(pcm, ax=ax2, location='bottom', pad=.07)
+    pcm=ax3.imshow( Vnij[n,:,:] )
+    cb3 = fig.colorbar(pcm, ax=ax3, location='bottom', pad=.07)
+
     ax1.set_title(f"T @ {n}")
-    ax2.imshow( Unij[n,:,:] )
     ax2.set_title(f"U @ {n}")
-    ax3.imshow( Vnij[n,:,:] )
     ax3.set_title(f"V @ {n}")
 
+    #cb1.mappable.set_clim(1E2,1E9)
+    fig.tight_layout()
 
+#%%
+plt.imshow(JAC>0)
