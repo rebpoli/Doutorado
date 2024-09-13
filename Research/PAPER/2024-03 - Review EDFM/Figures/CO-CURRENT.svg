@@ -1366,17 +1366,17 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.362645"
-     inkscape:cx="354.45769"
-     inkscape:cy="136.1323"
+     inkscape:zoom="1.0819009"
+     inkscape:cx="177.46543"
+     inkscape:cy="152.9715"
      inkscape:document-units="mm"
      inkscape:current-layer="layer4"
      inkscape:document-rotation="0"
      showgrid="false"
      showguides="true"
      inkscape:guide-bbox="true"
-     inkscape:window-width="1920"
-     inkscape:window-height="1009"
+     inkscape:window-width="1366"
+     inkscape:window-height="697"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
@@ -1399,6 +1399,21 @@
        gridanglex="30"
        gridanglez="30"
        visible="false" />
+    <sodipodi:guide
+       position="0,151.93843"
+       orientation="0,-1"
+       id="guide1"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="30.377048,134.57508"
+       orientation="1,0"
+       id="guide2"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="105.73567,134.57509"
+       orientation="1,0"
+       id="guide3"
+       inkscape:locked="false" />
   </sodipodi:namedview>
   <metadata
      id="metadata54891">
@@ -1430,9 +1445,9 @@
        id="g358"
        clip-path="url(#clipPath358)"
        transform="translate(22.21305,6.9900817)"
-       inkscape:export-filename="g358.png"
-       inkscape:export-xdpi="500"
-       inkscape:export-ydpi="500"
+       inkscape:export-filename="..\REVISIONS\ENERGIES\01 - Peer review\2024-07-02 - Round 01 - Apoio\new_figs\co-current.png"
+       inkscape:export-xdpi="1000"
+       inkscape:export-ydpi="1000"
        style="display:inline">
       <rect
          style="display:inline;fill:#cbcbcb;fill-opacity:1;stroke:none;stroke-width:0.849235;stroke-miterlimit:4;stroke-dasharray:1.69848, 0.849235;stroke-dashoffset:0"
@@ -1788,7 +1803,7 @@
        inkscape:export-filename="g359.png"
        inkscape:export-xdpi="500"
        inkscape:export-ydpi="500"
-       transform="translate(5.5326847,6.9900817)"
+       transform="translate(8.7076849,6.9900817)"
        style="display:inline">
       <rect
          style="display:inline;fill:#cbcbcb;fill-opacity:1;stroke:none;stroke-width:0.849235;stroke-miterlimit:4;stroke-dasharray:1.69848, 0.849235;stroke-dashoffset:0"
@@ -2141,6 +2156,28 @@
          d="m 111.12057,10.154598 h 7.09124"
          id="path354" />
     </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93888889px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;display:inline;stroke-width:0.264583"
+       x="26.477798"
+       y="-22.375774"
+       id="text3"><tspan
+         sodipodi:role="line"
+         id="tspan3"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93888889px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583"
+         x="26.477798"
+         y="-22.375774">(a)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93888889px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;display:inline;stroke-width:0.264583"
+       x="104.10822"
+       y="-22.245951"
+       id="text4"><tspan
+         sodipodi:role="line"
+         id="tspan4"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.93888889px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583"
+         x="104.10822"
+         y="-22.245951">(b)</tspan></text>
   </g>
   <g
      inkscape:label="Layer 1"

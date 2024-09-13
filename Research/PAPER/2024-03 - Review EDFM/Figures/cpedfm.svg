@@ -25,11 +25,11 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
      showguides="true"
-     inkscape:zoom="1.4485269"
-     inkscape:cx="609.5848"
-     inkscape:cy="355.18842"
-     inkscape:window-width="1920"
-     inkscape:window-height="1009"
+     inkscape:zoom="1.1500886"
+     inkscape:cx="691.25107"
+     inkscape:cy="396.92593"
+     inkscape:window-width="1366"
+     inkscape:window-height="697"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
@@ -545,9 +545,9 @@
        y="154.47643"
        clip-path="url(#clipPath8)"
        transform="matrix(0.93794565,0,0,0.794754,36.488237,-41.751836)"
-       inkscape:export-filename="cpedfm.png"
-       inkscape:export-xdpi="500"
-       inkscape:export-ydpi="500" />
+       inkscape:export-filename="..\REVISIONS\ENERGIES\01 - Peer review\2024-07-02 - Round 01 - Apoio\new_figs\cpedfm.png"
+       inkscape:export-xdpi="1000"
+       inkscape:export-ydpi="1000" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        d="M 114.82987,121.37749 136.20071,81.01891"
@@ -675,7 +675,9 @@
          id="tspan47"
          style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52778px;font-family:Arial;-inkscape-font-specification:'Arial Italic';stroke-width:0.264583"
          x="105.6771"
-         y="79.489746">cEDFM</tspan></text>
+         y="79.489746"><tspan
+   style="font-style:normal"
+   id="tspan2">(b) </tspan>cEDFM</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:3.52778px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
@@ -686,7 +688,9 @@
          id="tspan48"
          style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52778px;font-family:Arial;-inkscape-font-specification:'Arial Italic';stroke-width:0.264583"
          x="151.03728"
-         y="79.489754">pEDFM</tspan></text>
+         y="79.489754"><tspan
+   style="font-style:normal"
+   id="tspan3">(c) </tspan>pEDFM</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:0.469;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#marker21);marker-end:url(#Dot)"
        d="m 173.67006,85.376051 0,-4.35713"
@@ -724,7 +728,9 @@
          id="tspan62"
          style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52778px;font-family:Arial;-inkscape-font-specification:'Arial Italic';stroke-width:0.264583"
          x="60.012894"
-         y="79.489746">EDFM</tspan></text>
+         y="79.489746"><tspan
+   style="font-style:normal"
+   id="tspan1">(a) </tspan>EDFM</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        d="M 74.671454,109.39467 90.014527,81.091444"

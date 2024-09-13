@@ -1,0 +1,3 @@
+Thank you for bringing this to our attention. We appreciate your feedback. In the revised manuscript, we have included a sentence that provides examples of how the EDFM application enhanced the history-matching process for two types of models: hydraulic fractures and naturally fractured reservoirs. These case studies demonstrate the importance of incorporating fractures into the simulation model and highlight the effectiveness of EDFM in representing the role of fractures.
+
+
