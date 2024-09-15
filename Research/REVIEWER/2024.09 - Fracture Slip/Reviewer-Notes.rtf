@@ -1,0 +1,66 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1046{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil Calibri;}}
+{\*\generator Riched20 10.0.22621}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\f0\fs22\lang22 EFFECTS OF FAULT, FLUID AND OPERATIONAL PROPERTIES ON INDUCED SEISMICITY ALONG RESERVOIR FAULT DURING DEPLETED GAS RESERVOIR HYDROGEN STORAGE\par
+\par
+The paper uses a numerical framework to investigate the impact of operational and physical parameters on fault slip and seismicity. The object of the study is a depleted gas reservoir, under hydrogen storage. The paper overall language is adequate. It could benefit from a more concise text, especially in introduction. The results rely on a large set of figures and descriptive text. The authors could save some space and verbosity with tornado plots or summary tables with the effect of each parameter individualized.\par
+The introduction describes motivations and reviews the state of the art, followed by a deper literature review of each parameter under consideration. Next the authors present the mathematical background for the simulations and a description of the base case parameters. Results discuss independently one parameter at a time, then discussion and a brief summary as conclusions.\par
+The results are based on strong simplifications and assumptions, and the numerical framework accuracy is not clear. It is imporant to remark missing physics like the fracture tip behavior, plasticity envelppes, thermal-stresses, the presence of natural joints etc. The paper could benefit from some numerical validation work to reproduce expected behavior in some control cases. The parameterizatoin of the reservoir rock is unrealistic, especially with regards to the Biot coefficient. The results do not show the final pressure, displacement and stress fields, which might not be physical for the high injection rates investigated.\par
+With the purpose of providing the authors with a thorough feedback, my remarks are organized below.\par
+ABSTRACT\par
+- The abstract uses extensively the passive voice, differently from the body of the text. \par
+1. INTRODUCTION\par
+- Parts of the introduction may fit better in the literature survey. The text got long and lacks focus.\par
+- The last paragraph starting in page 1 ("Salt caverns have ...") could be split for clarity. See, for ex. line 22, page 2 ("Despite these deficiencies...") and line 30 ("It is often..." would fit better in new paragraphs.\par
+- There is a strong advocacy in favor of hydrogen storage in depleted reservoirs, excessively focusing on drawbacks of salt caverns and aquifers. I believe the technologies are not mutually exclusive, and I suggest to focus on the niche and applicability of each, balancing the tradeoffs.\par
+- I suggest being more selective on references and the contribution of each. For example, in page 2 (Muhammed et al, 2022) is cited at least 7 times.\par
+- I suggest adding more context to the last sentence in the third paragraph of page 2 ("Therefore, numerical simulation of geological ..."). It seems from the text that this is the only tool of analysis, whereas this is far from reality. Before any numerical simulation, a number of hypothesis and analytical work normally outlines the risks and opportunities, to be refined by numerical models.\par
+- Last paragraph of page 2 brings information irrelevant to the context. (Ex: "Geochemical research must examine ..."). I suggest shrinking the text and keep focus to the object in study\par
+- Page 3, first paragraph shall be rewritten for clarity. The second criteria is unclear ("Secondly, injection can lead to stress changes well beyond..."). The idea of fault slip under depletion may be more related to a differential depletion than compaction (each side of the fracture has a different depletion profile). I suggest revising.\par
+- Although seismicity is triggered by fault slip, this is not the only cause. The authors could discuss tensile or shear failure of the rock matrix. Although it is off the scope of the paper, it is important to be clear that only one issue is under investigation.\par
+- Page 3, second paragraph: "However, relatively little is known about the factors ...". I am not sure this is true, as faults and fractures have been extensively investigated for a long time.\par
+- The higher the Biot coefficient, the less likely of a fault to slip. This seems right. However, the base case used in the paper uses a low Biot coefficient (\\alpha=0.35), which is unlikely to be the case of a sandstone with \\phi=15%. Such parameter induces the models to more seismicity.\par
+- Although seismicity may (and will) occur, the paper seems to be willing to avoid them completely, which is likely impossible considering the ranges of pressure and temperature needed. Perhaps they should mention the criticality and criteria for designers assessing such an issue.\par
+- When mentioning the numerical simulator ICGT, it is important to cite references and numerical validation procedures covering the current use of the simulator. (last paragraph of the Introduction)\par
+2. LITERATURE REVIEW\par
+- The section cites work that has been done in similar environments. It acknoledges the limitations of 2D assessment, which is correct. The review could benefit from a more critical point of view. Numbers from the work of (Deng, 2021), for example, are listed without enough context. It is preferrable to provide the qualitative view of their work in the current context.\par
+- The arguments are not convinving, as each paper has its own context and applicability.\par
+- Friction coefficient: it is important to mention the physics that are missing in the models. Rocks are poroelastic in a very narrow domain. Poroplasticity, compaction and loss of integrity are normally strain release mechanisms which may happen before any fault slip. The higher the fault friction coefficient, the more likely these other mechanisms will be triggered.\par
+- Fault permeability: it would be interesting to investigate the fault normal fluid blockage, which will provide a differential pressure on both sides, that might trigger the slip.\par
+- Withdrawal rate, first paragraph: "The change in the effective horizontal...". The equations lack definition of the symbols (\\Delta P, for example) and context. Indeed, they are in a very narrow domain, and definetely not valid after a fault slip event, that will release energy and reaccomodate the stresses.\par
+- Withdrawal rate, last paragraph: "the effects of production rate on fault slip...". The authors do not provide enought evidence for that statement, as each cited paper studies a different context.\par
+- Fluid Viscosity: it is not clear if the model in use covers the "EHD fault lubrication regime".\par
+3. METHODOLOGY\par
+- Cite ICGT numerical validation work covering the current runs.\par
+- Not sure the term "Darcy-type" flow is adequate for the flow between parallel plates. Normally the term "cubic law" or "Poiseuille law". Note that such laws are highly imprecise for natural faults and fractures. See: (Viswanathan et al\f1  2022\f0\lang1046 :\f1\lang22  From fluid flow to coupled processes in fractured rock\f0\lang1046  ...)\par
+- Equation (1) and (2): normally the initial state of stress and strain \\sigma_0 and \\epsilon_0 are omitted. However, considering consistency, they might be present in equation (2). Maybe a comment on that might be useful to keep the text clear.\par
+- I could not understand the integrals in equation (4) and (6), as they normally emerge with a test function in the FEM context. Please revise.\par
+- The symbols are presented in the last paragraph of the section and in the legend of Table 1. Consider using a table of symbols of the description as they are used. \par
+- In equation (7), the use of a position vector x is not clear. Displacement u is normally preferred for small strains.\par
+- It is important to describe the fault model and its limitations. Need a reference in section 3.3 to provide a minimum background to equation (8), for example.\par
+- Last few paragraph of section 3.3 must be reorganized.\par
+- If I understood properly, the double loop augmented lagrangian algorithm is the one to solve the nonlinearities of the contact. It is important to discuss the algorithm, show the limitations and validation. How is the overall equilibrium and mass balance assessed after each run?\par
+- Please provide references for section 3.4.\par
+4. MODEL DESCRIPTION\par
+- Figure 1 is too small (unreadable).\par
+- The injection rate of a fluid must be defined in a specific Pressure and Temperature. The rates of gas injection are normally moderate in reservoir conditions.\par
+- The authors should be more clear on the boundary conditions used, especially mechanical ones.\par
+- Isoparametric linear elements in FEM are typically limited for this kind of assessment, demanding too much refinement near the fracture and increasing the stiffness artificially. Consider using quadratic elements.\par
+- Table 1 must be mentioned in the text earlier than Table 2 and before it appears.\par
+- Table 1: Biot coefficient is unrealistic (a sandstone with porosity around 15% would have \\alpha>0.6). Vertical stress is not clear (0.9800517 MPa - is this correct?). Mention the vertical stress at the reservoir depth. At what P,T the fluid properties were calculated? Provide references.\par
+- Table 1: the horizontal stresses are equal, this is a quite unique environment. As the earth crust is critically stressed it is likely that the reservoir and its surrondings will have critically stressed faults (in the imminence of slippage) - see Zoback "Reservoir Geomechanics" book, chapter 11 - Critically stressed faults and fluid flow.\par
+- Table 2: the parameters are not independent from each other. This is a limitation worth mentioning.\par
+5. RESULTS\par
+- The se\lang22 ctions are too descriptive, listing a number of net numbers without context. I suggest considering a couple of summary tables and illustrations to overview the most (and least) important factors. A tornado diagram, for example. \lang1046\par
+- The idea of "contact traction" is unclear. How relevant is the change in the direction of contact traction? Many figures show such change, but it is not clear what they communicate and how they help undertanding the phenomena.\par
+- Some parameters assessed could be introduced and reasoned by some physical phenomena. (1) Why would the well perforation length be important? In which cases this might be critical? What scenario the authors have in mind. A diagram could be useful for each case. (2) How fluid density and buoyancy can be important for the current scenario? What is the effective stresses expected at the bottom of the fracture due to boyancy?\par
+- It is not clear the pressure variation and stress distribution. For the high injection rates used, I would assume the pressure, stresses and displacements might become physically inconsistent.\par
+- Does temperature impacts fault slip? A section with limitations in this directions may help understand the domain and hypotheses of the study\par
+\lang22 - Some figures (e.g. Fig 11) show higher apertures near the corners and no aperture in the middle. Moreover, the noise on the apperture in such linear system suggest numerical issues.\par
+- In Fig. 10, the text is too small. It is difficult to understand and interpret the plots. The authors should summarize the results in reduced dimentionalities.\par
+\lang1046 6. DISCUSSION AND 7. CONCLUSIONS\par
+\lang22 - The authors must be more emphatic about the limitations of the study. Especially the lack of plasticity, compaction and other strain release mechanisms. The investigated fault was not critically stressed.\par
+- Discussion, paragraph 2: from the authors' argument the rate of 20m3/s is extremely high. One should not expect one well to cope with such rate even in worst case scenarios. Other problems are likely to occur, even in this simplistic models (ex: well Bottom hole pressure and cap rock integrity)\par
+- The conclusions cannot be generalized, as the case study is over-simplistic.\par
+- Need to emphasize along the text the extent to which seismic activity can be tolerated.\par
+}
+ 
